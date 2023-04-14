@@ -67,7 +67,7 @@ links for help:
     `mkdir <name>` we can call the folder Todo
 
 
-2. change into the new folder setup a new package with the command `npm init` that creates a .json file for your application. Fill in the fields as you want and enter `yes` at the end to create the file. confirm that the .json file was created  with `ls`
+2. change into the new folder and setup a new package with the command `npm init`. This creates a .json file for your application. Fill in the fields as you want and enter `yes` at the end to create the file. Confirm that the .json file was created  with `ls`
 
 
 ### Install ExpressJs
@@ -82,7 +82,7 @@ links for help:
 3. Install dotenv with `npm install dotenv`
 
 
-4. Open the index.js with a text editor such as vim and paste into it the code below, then save and exit the editor
+4. Open the `index.js` with a text editor such as vim and paste into it the code below, then save and exit the editor
 
 
 ```
@@ -114,7 +114,7 @@ console.log(`Server running on port ${port}`)
 
     If every thing goes well, you should see "Server running on port 5000" in your terminal
 
-    *Comments: I had an error that there was a program running on port 5000, so I used the code `npx kill-port 5000` to kill the program
+    *Comments: I had the error that there was a program running on port 5000, so I used the code `npx kill-port 5000` to kill that program
 
     ![error_port](./images/error_port_in_use.png)
 
@@ -127,7 +127,7 @@ console.log(`Server running on port ${port}`)
 ### Routes
 
 
-1. create the Routes directory : `mkdir Routes`
+1. Create the Routes directory : `mkdir Routes`
 
 
 2. Inside the Routes directory create a file named api.js
@@ -135,7 +135,7 @@ console.log(`Server running on port ${port}`)
    use  `cd Routes` then `touch api.js`
 
 
-3. open api.js with vim and paste the code below into it, then save and exit vim
+3. open `api.js` with vim and paste the code below into it, then save and exit vim
 
 
     ```
@@ -161,7 +161,7 @@ console.log(`Server running on port ${port}`)
 ### Models
 
 
-1. inside the Todo directory, install mongoose: `npm install mongoose`
+1. Inside the Todo directory, install mongoose: `npm install mongoose`
 
 
 2. Create a folder called "models", and inside it create a file named "todo.js": 
@@ -169,7 +169,7 @@ console.log(`Server running on port ${port}`)
     `mkdir models && cd models && touch todo.js`
 
 
-3. Paste the following code in the todo.js file 
+3. Paste the following code in the `todo.js` file 
 
     ```
     const mongoose = require('mongoose');
@@ -190,7 +190,7 @@ console.log(`Server running on port ${port}`)
     ```
 
 
-4. Now go back to the Routes directory and change the code in the api.js file
+4. Now go back to the Routes directory and change the code in the `api.js` file
 
     - delete the previous code with `:%d`
 
@@ -247,13 +247,15 @@ console.log(`Server running on port ${port}`)
     ![network access](./images/MogoDB-Network-Access.png)
 
 
-2. The `process.env` file mentioned in the index.js code is not yet created so you need to do that now. 
+2. The `process.env` file mentioned in the `index.js` code is not yet created so you need to do that now
 
-    Inside the Todo diretcory create a file named ".env" `touch .env`. Open the file and paste the follow in it `DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority'`
+    Inside the Todo diretcory create a file named ".env" `touch .env`. 
+    
+    Open the file and paste the following in it `DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority'`
 
-    **Note** You need to chnage the variables specified by the inequality symbols `<>` according to your setup
+    **Note** You need to change the variables specified by the inequality symbols `<>` according to your setup
 
-    Alternatively, you can get the connection string this way 
+    Alternatively, you can get the connection string this way:
 
     1. On the left-hand side of the page click on **Database**
 
@@ -264,7 +266,7 @@ console.log(`Server running on port ${port}`)
     4. Make sure you have selected for **Driver** : "Node.js", and you will find the connection string below under "Add your connection string into your application code"
 
 
-3. Update the index.js file so that it can use the .env file; substitute the previous code of index.js with this
+3. Update the `index.js` file so that it can use the .env file; substitute the previous code in the index.js with this
 
 
     ```
@@ -358,8 +360,7 @@ console.log(`Server running on port ${port}`)
 ## FRONTEND CONFIGURATION
 
 
-1. Inside the Todo folder run ` npx create-react-app client
-`
+1. Inside the Todo folder run ` npx create-react-app client`
 
     This will create a new folder called `client`, where you will add all the react code.
 
@@ -377,7 +378,7 @@ console.log(`Server running on port ${port}`)
     `npm install nodemon --save-dev`
 
 
-3. Inside the Todo folder, open the `package.json` file and change it where its says
+3. Inside the Todo folder, open the `package.json` file and change it where it says
 
     ```
     "scripts": {
@@ -399,7 +400,7 @@ console.log(`Server running on port ${port}`)
 ### Configure Proxy in package.json
 
 
-1. open package.json in the client directory
+1. open package.json inside the client directory
 
     `cd client && vi package.json`
 
@@ -585,7 +586,7 @@ console.log(`Server running on port ${port}`)
     ```
 
 
-9. Move back to the src folder with `cd ..` and run `vi App.js`. Copy and paste the following into the file:
+9. Move back into the src folder with `cd ..` and run `vi App.js`. Copy and paste the following into the file:
 
     ```
     import React from 'react';
