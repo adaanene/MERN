@@ -1,3 +1,1 @@
-
-
-Implementing a MERN stack to create a Todo list app
+This project is about configuring frontend and backend of MERN stack solution to deploy a "TO-DO" application that makes a list of tasks to do.
