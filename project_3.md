@@ -249,7 +249,7 @@ console.log(`Server running on port ${port}`)
 
 2. The `process.env` file mentioned in the `index.js` code is not yet created so you need to do that now
 
-    Inside the Todo diretcory create a file named ".env" `touch .env`. 
+    Inside the Todo directory create a file named ".env" `touch .env`. 
     
     Open the file and paste the following in it `DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority'`
 
@@ -286,7 +286,7 @@ console.log(`Server running on port ${port}`)
     .then(() => console.log(`Database connected successfully`))
     .catch(err => console.log(err));
 
-    //since mongoose promise is depreciated, we overide it with node's promise
+    //since mongoose promise is depreciated, we override it with node's promise
     mongoose.Promise = global.Promise;
 
     app.use((req, res, next) => {
@@ -320,7 +320,7 @@ console.log(`Server running on port ${port}`)
 
     ![error_fix](./images/string_error_fix.png)
 
-    But if you get errors, you will se the message **Database connnected successfully** in you terminal
+    But if you get errors, you will se the message **Database connected successfully** in you terminal
 
 
 ### Testing Backend Code without Frontend using RESTful API
