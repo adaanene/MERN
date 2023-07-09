@@ -3,43 +3,18 @@
 
 This project is about configuring frontend and backend of MERN stack solution to deploy a "TO-DO" application that makes a list of tasks to do.
 
-
-### Create an EC2 instance of t2.micro family with Ubuntu Server 20.04 LTS (HVM) in AWS
-   
-
-links for help: 
-   
-
-[Install OpenSSH for Windows](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell)
-   
-   
-[Key-based authentication in OpenSSH for Windows](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement)
-
-
-[Using EC2 as your virtual server](https://www.youtube.com/watch?v=xxKuB9kJoYM&list=PLtPuNR8I4TvkwU7Zu0l0G_uwtSUXLckvh&index=7)   
-   
-[connecting to EC2 instance in AWS](https://www.youtube.com/watch?v=TxT6PNJts-s&list=PLtPuNR8I4TvkwU7Zu0l0G_uwtSUXLckvh&index=8)
-
-
-1. Open terminal and move into the folder where you saved your private key (.pem file), use `cd <folder>` to change folder
-
-    **NOTE** to ensure that your key is not publicly viewable run `chmod 400 PBL_key_pair.pem`, otherwise you could get a "Bad permissions" error
-
-
-2. Start your EC2 instance in AWS and SSH into it(=connect) with public key and its Public DNS in you terminal
-
-    use: `ssh -i <private-key-name>.pem ubuntu@<Public-IP-address>` 
-
-
 ## BACKEND CONFIGURATION
 
 ### Install Node.js package
 
+1. Create and EC2 instance based on Ubuntu 22.04 LTS in AWS
 
-1. Update **apt** package manager in Ubuntu with `sudo apt update`
-
-
-2. Upgrade apt package with `sudo apt upgrade`
+2. Update and upgrade **apt** package manager in Ubuntu 
+    
+    ```
+    sudo apt update
+    sudo apt upgrade
+    ```
 
 
 3. Download Node.js package from Ubuntu repositories 
@@ -49,15 +24,13 @@ links for help:
 
 4. Install Node.js: `sudo apt-get install -y nodejs`
 
-    **NOTE** This command installs both Node.js and NPM which is a package manager for Node
-
 
 5. Verify that both are installed:
 
-    `node -v`
-
-    `npm -v`
-
+    ```
+    node -v
+    npm -v
+    ``````
 
 ### Create json file
 
@@ -67,7 +40,7 @@ links for help:
     `mkdir <name>` we can call the folder Todo
 
 
-2. change into the new folder and setup a new package with the command `npm init`. This creates a .json file for your application. Fill in the fields as you want and enter `yes` at the end to create the file. Confirm that the .json file was created  with `ls`
+2. Inside the new folder run the command `npm init`. This creates a .json file for your application. Fill in the fields as you want and enter `yes` at the end to create the file. Confirm that the .json file was created  with `ls`
 
 
 ### Install ExpressJs
@@ -82,31 +55,31 @@ links for help:
 3. Install dotenv with `npm install dotenv`
 
 
-4. Open the `index.js` with a text editor such as vim and paste into it the code below, then save and exit the editor
+4. Run `sudo vim index.js` and paste the code below
 
 
-```
-const express = require('express');
-require('dotenv').config();
+    ```
+    const express = require('express');
+    require('dotenv').config();
 
-const app = express();
+    const app = express();
 
-const port = process.env.PORT || 5000;
+    const port = process.env.PORT || 5000;
 
-app.use((req, res, next) => {
-res.header("Access-Control-Allow-Origin", "\*");
-res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-next();
-});
+    app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "\*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+    });
 
-app.use((req, res, next) => {
-res.send('Welcome to Express');
-});
+    app.use((req, res, next) => {
+    res.send('Welcome to Express');
+    });
 
-app.listen(port, () => {
-console.log(`Server running on port ${port}`)
-});
-```
+    app.listen(port, () => {
+    console.log(`Server running on port ${port}`)
+    });
+    ```
 
 5. Start the server with `node index.js`
 
@@ -119,7 +92,7 @@ console.log(`Server running on port ${port}`)
     ![error_port](./images/error_port_in_use.png)
 
 
-6. In EC2 console you need to update the instance inbound rules so that it can open TCP port 5000 (which is specified in the index.js  code) 
+6. Open TCP port 5000 (which is specified in the index.js  code) in the inbound rules for your instance
 
     Test that you can access the server on port 5000. Use this `http://<PublicIP-or-PublicDNS>:5000` and a page will come up with the message "Welcome to Express"
 
@@ -132,10 +105,13 @@ console.log(`Server running on port ${port}`)
 
 2. Inside the Routes directory create a file named api.js
 
-   use  `cd Routes` then `touch api.js`
+   ```
+   cd Routes
+   touch api.js
+   ```
 
 
-3. open `api.js` with vim and paste the code below into it, then save and exit vim
+3. Run  `sudo vim api.js` and paste the code below
 
 
     ```
@@ -373,7 +349,7 @@ console.log(`Server running on port ${port}`)
     `npm install concurrently --save-dev`
 
 
-2. Install `nodemom` which allows to run and monitor the server. Also updates the server whenever there is a new  change in the server code
+2. Install `nodemom` - this software allows to run and monitor the server and updates the server whenever there is a new  change in the server code
 
     `npm install nodemon --save-dev`
 
@@ -419,22 +395,21 @@ console.log(`Server running on port ${port}`)
 
 ### Creating your React Components
 
-1. Go into the client directory, and open the src folder
+    
+1. create a folder named "components" inside the src folder
 
-    `cd client/src`
+    ```
+    cd client/src
+    mkdir components
+    ``````
 
 
-2. create a folder named "components" inside the src folder
-
-    `mkdir components`
-
-
-3. Inside this newly created folder crete 3 files named as in the command 
+2. Inside this newly created folder crete 3 files named as in the command 
 
     `cd src` and `touch Input.js ListTodo.js Todo.js`
 
 
-4. Fill the `Input.js` file with the code below using a text editor
+3. Fill the `Input.js` file with the code below 
 
     ```
     import React, { Component } from 'react';
@@ -487,13 +462,13 @@ console.log(`Server running on port ${port}`)
     **Note** this code specifies `Axios` which you need to have installed in your machine 
 
 
-5. Make sure you are inside the `clients` folder, run `npm install axios`
+4. Make sure you are inside the `clients` folder and run `npm install axios`
 
 
-6. change into the `components` directory inside src: `cd src/components`
+5. Change into the `components` directory inside src: `cd src/components`
 
 
-7. Inside the `ListTodo.js` file paste the following code:
+6. Inside the `ListTodo.js` file paste the following code:
 
     ```
     import React from 'react';
@@ -722,14 +697,11 @@ console.log(`Server running on port ${port}`)
     ```
 
 
-12. Go to the Todo directory with `cd ../..`
-
-
-13. In the Todo directory run `npm run dev`
+12. Go to the Todo directory and run `npm run dev`
 
     If everything was done correctly and you have no syntax errors in your files, the features creating a task, deleting a task, and viewing all of your tasks should be available and completely functional in your to-do app.
 
-    ![Todo_app](./images/alldone.jpg)
+    ![Todo_app](./images/todo.jpg)
 
 
 
